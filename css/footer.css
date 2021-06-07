@@ -102,5 +102,28 @@
     font-size:13px;
     margin-bottom:0;
   }
+  #container{
+    font-size:10px;
+    background-color:#282d32;
+    height: 50hv;
+    display: flex;
+  }
+  #temperatura{
+    font-size:11px;
+    height: 50hv;
+    display: center;
+  }
+  #icono-clima{
+    font-size:11px;
+    height: 50hv;
+    display: center;
+  }
+  #nombre-clima{
+    font-size:11px;
+    height: 50hv;
+    display: center;
+  }
+  
+
   
   
