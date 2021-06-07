@@ -38,53 +38,47 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        //https://pokeapi.co/api/v2/pokemon/25
+      //https://pokeapi.co/api/v2/pokemon/25
 
-        $(document).ready(function(){
-            
-            $("#ostia").keypress(function(event){
-                var NumPokemon = $("#ostia").val();
-                var url = `https://pokeapi.co/api/v2/pokemon/${NumPokemon}`;
-                var keycode = (event.keyCode ? event.keyCode : event.which);
-                if(keycode == '13'){
-                    // alert('You pressed a "enter" key in textbox');	
-               
- 
-                  $("#filaPokemon").remove();
-  
-                  $.get(url,function(data){
-                      // console.log(NumPokemon);
-                      // console.log(data.name);
-                      // console.log(data.types[0].type.name);
-                      // console.log(data.sprites.other["official-artwork"].front_default);
-                      $("#pokemons").append(`<tr id="filaPokemon"> <td>${NumPokemon}</td> <td>${data.name}</td> <td> <img src='${data.sprites.other["official-artwork"].front_default}'  width="200" height="200"> </td> <td>${data.types[0].type.name}</td> </tr>`)
-  
-                  })
-                }
+      $(document).ready(function(){
+
+          $("#enviar").click(function(){
+              var NumPokemon = $("#numPokemon").val();
+              var url = `https://pokeapi.co/api/v2/pokemon/${NumPokemon}`;
+
+              $("#filaPokemon").remove();
+
+              $.get(url,function(data){
+                  // console.log(NumPokemon);
+                  // console.log(data.name);
+                  // console.log(data.types[0].type.name);
+                  // console.log(data.sprites.other["official-artwork"].front_default);
+                  $("#pokemons").append(`<tr id="filaPokemon"> <td>${NumPokemon}</td> <td>${data.name}</td> <td> <img src='${data.sprites.other["official-artwork"].front_default}'  width="200" height="200"> </td> <td>${data.types[0].type.name}</td> </tr>`)
+
               })
- 
-            $("#traerListado").click(function(){
-                var numPokemon1 = $("numPokemon1").val();
-                var numPokemon2 = $("numPokemon2").val();
-                //https://pokeapi.co/api/v2/pokemon?limit=151&offset=0
-                var url = `https://pokeapi.co/api/v2/pokemon?limit=${numPokemon2}&offset=${numPokemon1}`;
- 
-                var ArrayPokemon = []
- 
-                $.get(url,function(data){
-                    console.log(data.results)
+          })
 
-                }).then()
- 
- 
- 
-            })
- 
- 
-        })
+          $("#traerListado").click(function(){
+              var numPokemon1 = $("numPokemon1").val();
+              var numPokemon2 = $("numPokemon2").val();
+              //https://pokeapi.co/api/v2/pokemon?limit=151&offset=0
+              var url = `https://pokeapi.co/api/v2/pokemon?limit=${numPokemon2}&offset=${numPokemon1}`;
 
- 
-    </script>
+              var ArrayPokemon = []
+
+              $.get(url,function(data){
+                  console.log(data.results)
+
+              }).then()
+
+
+
+          })
+
+
+      })
+
+  </script>
 </head>
 <body>
 
@@ -145,22 +139,7 @@
       </header>    
 
 
-    <div class="container-contact100">
-      <form class="contact100-form validate-form">
-				<span class="contact100-form-title">
-					Mandanos un mensaje
-				</span>
-
-				<label class="label-input100" for="first-name">Dinos tu nombre *</label>
-				<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name">
-					<input id="ostia" class="input100" type="text" name="first-name" placeholder="Nombre">
-					<span class="focus-input100"></span>
-				</div>
-      </form>
-    </div>
-
-
-    <div class="container">
+      <div class="container">
         <div class="row">
             <h1>Traer datos desde Api Pokemon</h1>
         </div>
@@ -192,7 +171,6 @@
             </table>
         </div>
     </div>
- 
  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     

@@ -66,12 +66,12 @@
                     $.get(url,function(data){
                         $("#pokemons").append(`<th scope="row">${data.weight}</th> <td>${data.name}</td> <td>${data.name}</td> <td>${data.name}</td>`)
                     })
-                    $.get(url2,function(data){
+                    $.get(url2,function(dataa){
                         // console.log(NumPokemon);
                         // console.log(data.name);
                         // console.log(data.types[0].type.name);
                         // console.log(data.sprites.other["official-artwork"].front_default);
-                        $("#pokemons").append(`<td>${data.name}</td>`)
+                        $("#pokemons").append(`<td>${dataa.weight}</td>`)
  
                     })
                 }
