@@ -38,8 +38,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        //https://pokeapi.co/api/v2/pokemon/25
-
         $(document).ready(function(){
           $('#vehiculos').hide();
           $('#vehiculos2').hide();
@@ -59,8 +57,8 @@
                 $this.html($this.data('original-text'));
             }, 200);
 
-            var NumPokemon = $("#numPokemon").val();
-            var url = `https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/${NumPokemon}?format=json`;
+            var marca = $("#marca").val();
+            var url = `https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/${marca}?format=json`;
             $('#vehiculos tbody').empty();
                   $.get(url,function(data){
             $.each(data.Results,function(i,item){
@@ -85,8 +83,8 @@
               $this.html($this.data('original-text'));
           }, 200);
 
-          var NumPokemon2 = $("#numPokemon2").val();
-          var url = `https://vpic.nhtsa.dot.gov/api/vehicles/getmanufacturerdetails/${NumPokemon2}?format=json`;
+          var marca2 = $("#marca2").val();
+          var url = `https://vpic.nhtsa.dot.gov/api/vehicles/getmanufacturerdetails/${marca2}?format=json`;
           $('#vehiculos2 tbody').empty();
                   //$("#vehiculos tr").show();
           $.get(url,function(data){
@@ -113,8 +111,8 @@
           }, 200);
 
 
-          var NumPokemon3 = $("#numPokemon3").val();
-          var url = `https://vpic.nhtsa.dot.gov/api/vehicles/GetVehicleTypesForMake/${NumPokemon3}?format=json`;
+          var marca3 = $("#marca3").val();
+          var url = `https://vpic.nhtsa.dot.gov/api/vehicles/GetVehicleTypesForMake/${marca3}?format=json`;
           $('#vehiculos3 tbody').empty();
                   //$("#vehiculos tr").remove();
           $.get(url,function(data){
@@ -207,7 +205,7 @@
               <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                   <strong>Esto devuelve todos los modelos de vehículos de la marca.</strong> Las modernas fábricas se han adaptado a procesos de producción cada vez más complejos. Es posible que las marcas nos ofrezcan más de lo que necesitamos, de hecho hay modelos con unas ventas realmente residuales. Pero todo suma y el potencial de estas grandes empresas les permite aceptar el desafío.
-                  <input type="text" min="1" max="898" class="form-control mb-2" id="numPokemon" placeholder="Ingresa la marca del vehículo">
+                  <input type="text" min="1" max="898" class="form-control mb-2" id="marca" placeholder="Ingresa la marca del vehículo">
                   <button type="button" class="btn btn-primary" id="enviar">Buscar vehículos!</button>
                   
                   <table class="table" id="vehiculos">
@@ -234,7 +232,7 @@
               <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                   <strong>Esto proporciona los detalles de un fabricante específico que se solicita.</strong> Es el lugar donde se produce de manera industrial y sistemática automóviles de distintos modelos y propósitos con el fin de invadir el mercado local y mundial, con una completa infraestructura mecánica y tecnológica. Para que dichos establecimientos funcionen se debe tener un capital humano calificado y por supuesto un capital financiero considerablemente elevado, sin embargo, es importante recalcar que existen pequeñas fábricas donde se fabrican coches de manera manual y artesanal, las cuales se han venido posicionando a través de los años dando pasos importantes en relación a su crecimiento.
-                  <input type="text" min="1" max="898" class="form-control mb-2" id="numPokemon2" placeholder="Ingresa la marca del vehículo">
+                  <input type="text" min="1" max="898" class="form-control mb-2" id="marca2" placeholder="Ingresa la marca del vehículo">
                   <button type="button" class="btn btn-primary" id="enviar2">Buscar vehículos!</button>
                   <table class="table" id="vehiculos2">
                     <thead class="table-dark">
@@ -262,7 +260,7 @@
               <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                   <strong>Esto devuelve todos los tipos de vehículos de una marca.</strong> La clasificación de automóviles es un término general que se refiere a la manera de agrupar vehículos en categorías según sus características técnicas y comerciales.
-                  <input type="text" min="1" max="898" class="form-control mb-2" id="numPokemon3" placeholder="Ingresa la marca del vehículo">
+                  <input type="text" min="1" max="898" class="form-control mb-2" id="marca3" placeholder="Ingresa la marca del vehículo">
                   <button type="button" class="btn btn-primary" id="enviar3">Buscar vehículos!</button>
                   <table class="table" id="vehiculos3">
                     <thead class="table-dark">
