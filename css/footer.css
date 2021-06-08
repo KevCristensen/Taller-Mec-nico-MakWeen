@@ -103,10 +103,11 @@
     margin-bottom:0;
   }
   #container{
-    font-size:10px;
+    font-size: 20px;
     background-color:#282d32;
     height: 50hv;
     display: flex;
+    
   }
   #temperatura{
     font-size:11px;
