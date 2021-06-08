@@ -12,56 +12,92 @@
         //https://pokeapi.co/api/v2/pokemon/25
 
         $(document).ready(function(){
-            $("#enviar").click(function(){
-                $('#pokemons tbody').show();
-                var $this = $(this);
-                var loadingText = '<i class="fa fa-circle-o-notch fa-spin"></i> Cargando...';
-                if ($(this).html() !== loadingText) {
-                    $this.data('original-text', $(this).html());
-                    $this.html(loadingText);
-                }
-                setTimeout(function() {
-                    $this.html($this.data('original-text'));
-                }, 200);
+          $('#pokemons').hide();
+          $('#pokemons2').hide();
+          $('#pokemons3').hide();
+          $("#enviar").click(function(){
+            $('#pokemons').show();
+            $('#pokemons2').hide();
+            $('#pokemons3').hide();
 
-				var NumPokemon = $("#numPokemon").val();
-				var url = `https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/${NumPokemon}?format=json`;
-				$('#pokemons tbody').empty();
-                $.get(url,function(data){
-					$.each(data.Results,function(i,item){
-						$("#pokemons").append(`<tr id="filaPokemon"> <th scope="row"> ${item.Make_ID}</th> <td>${item.Make_Name}</td> <td>${item.Model_ID}</td> <td>${item.Model_Name}</td></tr>`)						
-					})
-				})
-			})
+            var $this = $(this);
+            var loadingText = '<i class="fa fa-circle-o-notch fa-spin"></i> Cargando...';
+            if ($(this).html() !== loadingText) {
+                $this.data('original-text', $(this).html());
+                $this.html(loadingText);
+            }
+            setTimeout(function() {
+                $this.html($this.data('original-text'));
+            }, 200);
 
-			$("#enviar2").click(function(){
-				var NumPokemon2 = $("#numPokemon2").val();
-				var url = `https://vpic.nhtsa.dot.gov/api/vehicles/getmanufacturerdetails/${NumPokemon2}?format=json`;
-				$('#pokemons2 tbody').empty();
-                //$("#pokemons tr").show();
-				$.get(url,function(data){
-                    if (data.Results)
-					$.each(data.Results,function(i,item){
-						$("#pokemons2").append(`<tr id="filaPokemon"> <th scope="row">${item.Mfr_CommonName}</th> <td>${item.Address}</td> <td>${item.City}</td> <td>${item.Country}</td> <td>${item.Mfr_Name}</td> <td>${item.StateProvince}</td></tr>`)						
-					})
-				})
-			})
+            var NumPokemon = $("#numPokemon").val();
+            var url = `https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/${NumPokemon}?format=json`;
+            $('#pokemons tbody').empty();
+                  $.get(url,function(data){
+            $.each(data.Results,function(i,item){
+              $("#pokemons").append(`<tr id="filaPokemon"> <th scope="row"> ${item.Make_ID}</th> <td>${item.Make_Name}</td> <td>${item.Model_ID}</td> <td>${item.Model_Name}</td></tr>`)						
+            })
+          })
 
-            $("#enviar3").click(function(){
-				var NumPokemon3 = $("#numPokemon3").val();
-				var url = `https://vpic.nhtsa.dot.gov/api/vehicles/GetVehicleTypesForMake/${NumPokemon3}?format=json`;
-				$('#pokemons3 tbody').empty();
-                //$("#pokemons tr").remove();
-				$.get(url,function(data){
-					$.each(data.Results,function(i,item){
-						$("#pokemons3").append(`<tr id="filaPokemon"> <th scope="row">${item.MakeName}</th> <td>${item.VehicleTypeName}</td></tr>`)						
-					})
-				})
-			})
-
- 
- 
         })
+
+        $("#enviar2").click(function(){
+          $('#pokemons').hide();
+          $('#pokemons2').show();
+          $('#pokemons3').hide();
+
+          var $this = $(this);
+          var loadingText = '<i class="fa fa-circle-o-notch fa-spin"></i> Cargando...';
+          if ($(this).html() !== loadingText) {
+              $this.data('original-text', $(this).html());
+              $this.html(loadingText);
+          }
+          setTimeout(function() {
+              $this.html($this.data('original-text'));
+          }, 200);
+
+          var NumPokemon2 = $("#numPokemon2").val();
+          var url = `https://vpic.nhtsa.dot.gov/api/vehicles/getmanufacturerdetails/${NumPokemon2}?format=json`;
+          $('#pokemons2 tbody').empty();
+                  //$("#pokemons tr").show();
+          $.get(url,function(data){
+                      if (data.Results)
+            $.each(data.Results,function(i,item){
+              $("#pokemons2").append(`<tr id="filaPokemon"> <th scope="row">${item.Mfr_CommonName}</th> <td>${item.Address}</td> <td>${item.City}</td> <td>${item.Country}</td> <td>${item.Mfr_Name}</td> <td>${item.StateProvince}</td></tr>`)						
+            })
+          })
+        })
+
+        $("#enviar3").click(function(){
+          $('#pokemons').hide();
+          $('#pokemons2').hide();
+          $('#pokemons3').show();
+
+          var $this = $(this);
+          var loadingText = '<i class="fa fa-circle-o-notch fa-spin"></i> Cargando...';
+          if ($(this).html() !== loadingText) {
+              $this.data('original-text', $(this).html());
+              $this.html(loadingText);
+          }
+          setTimeout(function() {
+              $this.html($this.data('original-text'));
+          }, 200);
+
+
+          var NumPokemon3 = $("#numPokemon3").val();
+          var url = `https://vpic.nhtsa.dot.gov/api/vehicles/GetVehicleTypesForMake/${NumPokemon3}?format=json`;
+          $('#pokemons3 tbody').empty();
+                  //$("#pokemons tr").remove();
+          $.get(url,function(data){
+            $.each(data.Results,function(i,item){
+              $("#pokemons3").append(`<tr id="filaPokemon"> <th scope="row">${item.MakeName}</th> <td>${item.VehicleTypeName}</td></tr>`)						
+					  })
+				  })
+			  })
+
+ 
+ 
+      })
  
     </script>
 </head>
@@ -93,24 +129,7 @@
                 <div class="accordion-body">
                   <strong>Esto devuelve todos los modelos de vehículos de la marca.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
                   <input type="text" min="1" max="898" class="form-control mb-2" id="numPokemon" placeholder="Ingresa la marca del vehículo">
-                  <button type="button" class="btn btn-primary" id="enviar">Buscar Pokemon!</button>
-                  
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="switch1" name="id_mod" checked="checked">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Id de la marca</label>
-                  </div>
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="switch2" checked="checked">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Nombre del Modelo</label>
-                  </div>
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="switch3" checked="checked"> 
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Id de Modelo</label>
-                  </div>
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="switch4" checked="checked">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Nombre del Modelo</label>
-                  </div>
+                  <button type="button" class="btn btn-primary" id="enviar">Buscar vehículos!</button>
                   
                   <table class="table" id="pokemons">
                     <thead class="table-dark">
@@ -137,7 +156,7 @@
                 <div class="accordion-body">
                   <strong>Esto proporciona los detalles de un fabricante específico que se solicita.</strong> Es el lugar donde se produce de manera industrial y sistemática automóviles de distintos modelos y propósitos con el fin de invadir el mercado local y mundial, con una completa infraestructura mecánica y tecnológica. Para que dichos establecimientos funcionen se debe tener un capital humano calificado y por supuesto un capital financiero considerablemente elevado, sin embargo, es importante recalcar que existen pequeñas fábricas donde se fabrican coches de manera manual y artesanal, las cuales se han venido posicionando a través de los años dando pasos importantes en relación a su crecimiento.
                   <input type="text" min="1" max="898" class="form-control mb-2" id="numPokemon2" placeholder="Ingresa la marca del vehículo">
-                  <button type="button" class="btn btn-primary" id="enviar2">Buscar Pokemon!</button>
+                  <button type="button" class="btn btn-primary" id="enviar2">Buscar vehículos!</button>
                   <table class="table" id="pokemons2">
                     <thead class="table-dark">
                       <tr>
@@ -165,7 +184,7 @@
                 <div class="accordion-body">
                   <strong>Esto devuelve todos los tipos de vehículos de una marca.</strong> La clasificación de automóviles es un término general que se refiere a la manera de agrupar vehículos en categorías según sus características técnicas y comerciales.
                   <input type="text" min="1" max="898" class="form-control mb-2" id="numPokemon3" placeholder="Ingresa la marca del vehículo">
-                  <button type="button" class="btn btn-primary" id="enviar3">Buscar Pokemon!</button>
+                  <button type="button" class="btn btn-primary" id="enviar3">Buscar vehículos!</button>
                   <table class="table" id="pokemons3">
                     <thead class="table-dark">
                       <tr>
