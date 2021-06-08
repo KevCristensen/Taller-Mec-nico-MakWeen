@@ -41,13 +41,13 @@
         //https://pokeapi.co/api/v2/pokemon/25
 
         $(document).ready(function(){
-          $('#pokemons').hide();
-          $('#pokemons2').hide();
-          $('#pokemons3').hide();
+          $('#vehiculos').hide();
+          $('#vehiculos2').hide();
+          $('#vehiculos3').hide();
           $("#enviar").click(function(){
-            $('#pokemons').show();
-            $('#pokemons2').hide();
-            $('#pokemons3').hide();
+            $('#vehiculos').show();
+            $('#vehiculos2').hide();
+            $('#vehiculos3').hide();
 
             var $this = $(this);
             var loadingText = '<i class="fa fa-circle-o-notch fa-spin"></i> Cargando...';
@@ -61,19 +61,19 @@
 
             var NumPokemon = $("#numPokemon").val();
             var url = `https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/${NumPokemon}?format=json`;
-            $('#pokemons tbody').empty();
+            $('#vehiculos tbody').empty();
                   $.get(url,function(data){
             $.each(data.Results,function(i,item){
-              $("#pokemons").append(`<tr id="filaPokemon"> <th scope="row"> ${item.Make_ID}</th> <td>${item.Make_Name}</td> <td>${item.Model_ID}</td> <td>${item.Model_Name}</td></tr>`)						
+              $("#vehiculos").append(`<tr id="filaVehiculos"> <th scope="row"> ${item.Make_ID}</th> <td>${item.Make_Name}</td> <td>${item.Model_ID}</td> <td>${item.Model_Name}</td></tr>`)						
             })
           })
 
         })
 
         $("#enviar2").click(function(){
-          $('#pokemons').hide();
-          $('#pokemons2').show();
-          $('#pokemons3').hide();
+          $('#vehiculos').hide();
+          $('#vehiculos2').show();
+          $('#vehiculos3').hide();
 
           var $this = $(this);
           var loadingText = '<i class="fa fa-circle-o-notch fa-spin"></i> Cargando...';
@@ -87,20 +87,20 @@
 
           var NumPokemon2 = $("#numPokemon2").val();
           var url = `https://vpic.nhtsa.dot.gov/api/vehicles/getmanufacturerdetails/${NumPokemon2}?format=json`;
-          $('#pokemons2 tbody').empty();
-                  //$("#pokemons tr").show();
+          $('#vehiculos2 tbody').empty();
+                  //$("#vehiculos tr").show();
           $.get(url,function(data){
                       if (data.Results)
             $.each(data.Results,function(i,item){
-              $("#pokemons2").append(`<tr id="filaPokemon"> <th scope="row">${item.Mfr_CommonName}</th> <td>${item.Address}</td> <td>${item.City}</td> <td>${item.Country}</td> <td>${item.Mfr_Name}</td> <td>${item.StateProvince}</td></tr>`)						
+              $("#vehiculos2").append(`<tr id="filaVehiculos"> <th scope="row">${item.Mfr_CommonName}</th> <td>${item.Address}</td> <td>${item.City}</td> <td>${item.Country}</td> <td>${item.Mfr_Name}</td> <td>${item.StateProvince}</td></tr>`)						
             })
           })
         })
 
         $("#enviar3").click(function(){
-          $('#pokemons').hide();
-          $('#pokemons2').hide();
-          $('#pokemons3').show();
+          $('#vehiculos').hide();
+          $('#vehiculos2').hide();
+          $('#vehiculos3').show();
 
           var $this = $(this);
           var loadingText = '<i class="fa fa-circle-o-notch fa-spin"></i> Cargando...';
@@ -115,11 +115,11 @@
 
           var NumPokemon3 = $("#numPokemon3").val();
           var url = `https://vpic.nhtsa.dot.gov/api/vehicles/GetVehicleTypesForMake/${NumPokemon3}?format=json`;
-          $('#pokemons3 tbody').empty();
-                  //$("#pokemons tr").remove();
+          $('#vehiculos3 tbody').empty();
+                  //$("#vehiculos tr").remove();
           $.get(url,function(data){
             $.each(data.Results,function(i,item){
-              $("#pokemons3").append(`<tr id="filaPokemon"> <th scope="row">${item.MakeName}</th> <td>${item.VehicleTypeName}</td></tr>`)						
+              $("#vehiculos3").append(`<tr id="filaVehiculos"> <th scope="row">${item.MakeName}</th> <td>${item.VehicleTypeName}</td></tr>`)						
 					  })
 				  })
 			  })
@@ -201,7 +201,7 @@
                   <input type="text" min="1" max="898" class="form-control mb-2" id="numPokemon" placeholder="Ingresa la marca del vehículo">
                   <button type="button" class="btn btn-primary" id="enviar">Buscar vehículos!</button>
                   
-                  <table class="table" id="pokemons">
+                  <table class="table" id="vehiculos">
                     <thead class="table-dark">
                       <tr>
                         <th scope="col" class="id_mod">Id_del_Modelo_Make_ID</th>
@@ -227,7 +227,7 @@
                   <strong>Esto proporciona los detalles de un fabricante específico que se solicita.</strong> Es el lugar donde se produce de manera industrial y sistemática automóviles de distintos modelos y propósitos con el fin de invadir el mercado local y mundial, con una completa infraestructura mecánica y tecnológica. Para que dichos establecimientos funcionen se debe tener un capital humano calificado y por supuesto un capital financiero considerablemente elevado, sin embargo, es importante recalcar que existen pequeñas fábricas donde se fabrican coches de manera manual y artesanal, las cuales se han venido posicionando a través de los años dando pasos importantes en relación a su crecimiento.
                   <input type="text" min="1" max="898" class="form-control mb-2" id="numPokemon2" placeholder="Ingresa la marca del vehículo">
                   <button type="button" class="btn btn-primary" id="enviar2">Buscar vehículos!</button>
-                  <table class="table" id="pokemons2">
+                  <table class="table" id="vehiculos2">
                     <thead class="table-dark">
                       <tr>
                         <th scope="col">Marca</th>
@@ -235,7 +235,7 @@
                         <th scope="col">Ciudad</th>
                         <th scope="col">País</th>
                         <th scope="col">Nombre de la empresa</th>
-						<th scope="col">Provincia</th>
+						            <th scope="col">Provincia</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -255,7 +255,7 @@
                   <strong>Esto devuelve todos los tipos de vehículos de una marca.</strong> La clasificación de automóviles es un término general que se refiere a la manera de agrupar vehículos en categorías según sus características técnicas y comerciales.
                   <input type="text" min="1" max="898" class="form-control mb-2" id="numPokemon3" placeholder="Ingresa la marca del vehículo">
                   <button type="button" class="btn btn-primary" id="enviar3">Buscar vehículos!</button>
-                  <table class="table" id="pokemons3">
+                  <table class="table" id="vehiculos3">
                     <thead class="table-dark">
                       <tr>
                         <th scope="col">Marca</th>
