@@ -32,6 +32,16 @@
 						$("#pokemons").append(`<tr id="filaPokemon"> <th scope="row"> ${item.Make_ID}</th> <td>${item.Make_Name}</td> <td>${item.Model_ID}</td> <td>${item.Model_Name}</td></tr>`)						
 					})
 				})
+                
+        $("input:checkbox:not(:checked)").each(function() {
+          $('td:nth-child(2)').hide();
+        });
+
+        $("input:checkbox").click(function(){
+            $('#pokemons td:nth-child(1)').toggle();
+        });        
+    
+
 			})
 
 			$("#enviar2").click(function(){
@@ -94,14 +104,31 @@
                   <strong>Esto devuelve todos los modelos de vehículos de la marca.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
                   <input type="text" min="1" max="898" class="form-control mb-2" id="numPokemon" placeholder="Ingresa la marca del vehículo">
                   <button type="button" class="btn btn-primary" id="enviar">Buscar Pokemon!</button>
+                  
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="switch1" name="id_mod" checked="checked">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Id de la marca</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="switch2" checked="checked">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Nombre del Modelo</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="switch3" checked="checked"> 
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Id de Modelo</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="switch4" checked="checked">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Nombre del Modelo</label>
+                  </div>
+                  
                   <table class="table" id="pokemons">
                     <thead class="table-dark">
                       <tr>
-                        <th scope="col">Id del Modelo Make_ID</th>
+                        <th scope="col" class="id_mod">Id_del_Modelo_Make_ID</th>
                         <th scope="col">Nombre del Modelo</th>
                         <th scope="col">Id del Modelo Model_ID</th>
                         <th scope="col">Nombre del Modelo</th>
-						<th scope="col">Tipo</th>
                       </tr>
                     </thead>
                     <tbody>
