@@ -50,21 +50,25 @@
             var $this = $(this);
             var loadingText = '<i class="fa fa-circle-o-notch fa-spin"></i> Cargando...';
             if ($(this).html() !== loadingText) {
-                $this.data('original-text', $(this).html());
-                $this.html(loadingText);
+              $this.data('original-text', $(this).html());
+              $this.html(loadingText);
             }
             setTimeout(function() {
-                $this.html($this.data('original-text'));
+              $this.html($this.data('original-text'));
             }, 200);
 
             var marca = $("#marca").val();
             var url = `https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/${marca}?format=json`;
             $('#vehiculos tbody').empty();
-                  $.get(url,function(data){
-            $.each(data.Results,function(i,item){
-              $("#vehiculos").append(`<tr id="filaVehiculos"> <th scope="row"> ${item.Make_ID}</th> <td>${item.Make_Name}</td> <td>${item.Model_ID}</td> <td>${item.Model_Name}</td></tr>`)						
+            $.get(url,function(data){
+              $.each(data.Results,function(i,item){
+                $("#vehiculos").append(`<tr id="filaVehiculos"> <td class="id"> ${item.Make_ID}</td> <td class="nombre_marca">${item.Make_Name}</td> <td class="id_modelo">${item.Model_ID}</td> <td class="nombre_modelo">${item.Model_Name}</td></tr>`)						
+                $("input:checkbox:not(:checked)").each(function() {
+                  var column = "table ." + $(this).attr("name");
+                  $(column).hide();
+                });
+              })
             })
-          })
 
         })
 
@@ -90,7 +94,11 @@
           $.get(url,function(data){
                       if (data.Results)
             $.each(data.Results,function(i,item){
-              $("#vehiculos2").append(`<tr id="filaVehiculos"> <th scope="row">${item.Mfr_CommonName}</th> <td>${item.Address}</td> <td>${item.City}</td> <td>${item.Country}</td> <td>${item.Mfr_Name}</td> <td>${item.StateProvince}</td></tr>`)						
+              $("#vehiculos2").append(`<tr id="filaVehiculos"> <td class="marca">${item.Mfr_CommonName}</td> <td class="direccion">${item.Address}</td> <td class="ciudad">${item.City}</td> <td class="pais">${item.Country}</td> <td class="empresa">${item.Mfr_Name}</td> <td class="provincia">${item.StateProvince}</td></tr>`)						
+              $("input:checkbox:not(:checked)").each(function() {
+                var column = "table ." + $(this).attr("name");
+                $(column).hide();
+              });
             })
           })
         })
@@ -117,11 +125,24 @@
                   //$("#vehiculos tr").remove();
           $.get(url,function(data){
             $.each(data.Results,function(i,item){
-              $("#vehiculos3").append(`<tr id="filaVehiculos"> <th scope="row">${item.MakeName}</th> <td>${item.VehicleTypeName}</td></tr>`)						
-					  })
+              $("#vehiculos3").append(`<tr id="filaVehiculos"> <td class="marca">${item.MakeName}</td> <td class="tipo">${item.VehicleTypeName}</td> <td class="id2">${item.VehicleTypeId} </td></tr>`)						
+              $("input:checkbox:not(:checked)").each(function() {
+                var column = "table ." + $(this).attr("name");
+                $(column).hide();
+              });
+            })
 				  })
 			  })
 
+        $("input:checkbox:not(:checked)").each(function() {
+          var column = "table ." + $(this).attr("name");
+          $(column).hide();
+        });
+
+        $("input:checkbox").click(function(){
+            var column = "table ." + $(this).attr("name");
+            $(column).toggle();
+        });
  
  
       })
@@ -207,14 +228,31 @@
                   <strong>Esto devuelve todos los modelos de vehículos de la marca.</strong> Las modernas fábricas se han adaptado a procesos de producción cada vez más complejos. Es posible que las marcas nos ofrezcan más de lo que necesitamos, de hecho hay modelos con unas ventas realmente residuales. Pero todo suma y el potencial de estas grandes empresas les permite aceptar el desafío.
                   <input type="text" min="1" max="898" class="form-control mb-2" id="marca" placeholder="Ingresa la marca del vehículo">
                   <button type="button" class="btn btn-primary" id="enviar">Buscar vehículos!</button>
-                  
+                  <p>
+                    <div class="form-check-inline form-switch">
+                      <input class="form-check-input" name="id" type="checkbox" id="flexSwitchCheckChecked" >
+                      <label class="form-check-label" for="flexSwitchCheckChecked">Id_Marca</label>
+                    </div>
+                    <div class="form-check-inline form-switch">
+                      <input class="form-check-input" name="nombre_marca" type="checkbox" id="flexSwitchCheckChecked2" checked>
+                      <label class="form-check-label" for="flexSwitchCheckChecked2">Marca</label>
+                    </div>
+                    <div class="form-check-inline form-switch">
+                      <input class="form-check-input" name="id_modelo" type="checkbox" id="flexSwitchCheckChecked3" >
+                      <label class="form-check-label" for="flexSwitchCheckChecked3">Id_Modelo</label>
+                    </div>
+                    <div class="form-check-inline form-switch">
+                      <input class="form-check-input" name="nombre_modelo" type="checkbox" id="flexSwitchCheckChecked4" checked>
+                      <label class="form-check-label" for="flexSwitchCheckChecked4">Nombre_del_Modelo</label>
+                    </div>
+                  </p>
                   <table class="table" id="vehiculos">
                     <thead class="table-dark">
                       <tr>
-                        <th scope="col" class="id_mod">Id_del_Modelo_Make_ID</th>
-                        <th scope="col">Nombre del Modelo</th>
-                        <th scope="col">Id del Modelo Model_ID</th>
-                        <th scope="col">Nombre del Modelo</th>
+                        <th scope="col" class="id">Id_del_Modelo_Make_ID</th>
+                        <th scope="col" class="nombre_marca">Nombre de la Marca</th>
+                        <th scope="col" class="id_modelo">Id del Modelo Model_ID</th>
+                        <th scope="col" class="nombre_modelo">Nombre del Modelo</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -234,15 +272,41 @@
                   <strong>Esto proporciona los detalles de un fabricante específico que se solicita.</strong> Es el lugar donde se produce de manera industrial y sistemática automóviles de distintos modelos y propósitos con el fin de invadir el mercado local y mundial, con una completa infraestructura mecánica y tecnológica. Para que dichos establecimientos funcionen se debe tener un capital humano calificado y por supuesto un capital financiero considerablemente elevado, sin embargo, es importante recalcar que existen pequeñas fábricas donde se fabrican coches de manera manual y artesanal, las cuales se han venido posicionando a través de los años dando pasos importantes en relación a su crecimiento.
                   <input type="text" min="1" max="898" class="form-control mb-2" id="marca2" placeholder="Ingresa la marca del vehículo">
                   <button type="button" class="btn btn-primary" id="enviar2">Buscar vehículos!</button>
+                  <p>
+                    <div class="form-check-inline form-switch">
+                      <input class="form-check-input" name="marca" type="checkbox" id="flexSwitchCheckCheckedd" checked>
+                      <label class="form-check-label" for="flexSwitchCheckCheckedd">Marca</label>
+                    </div>
+                    <div class="form-check-inline form-switch">
+                      <input class="form-check-input" name="direccion" type="checkbox" id="flexSwitchCheckCheckedd2" checked>
+                      <label class="form-check-label" for="flexSwitchCheckCheckedd2">Direccion</label>
+                    </div>
+                    <div class="form-check-inline form-switch">
+                      <input class="form-check-input" name="ciudad" type="checkbox" id="flexSwitchCheckCheckedd3" checked>
+                      <label class="form-check-label" for="flexSwitchCheckCheckedd3">Ciudad</label>
+                    </div>
+                    <div class="form-check-inline form-switch">
+                      <input class="form-check-input" name="pais" type="checkbox" id="flexSwitchCheckCheckedd4" checked>
+                      <label class="form-check-label" for="flexSwitchCheckCheckedd4">País</label>
+                    </div>
+                    <div class="form-check-inline form-switch">
+                      <input class="form-check-input" name="empresa" type="checkbox" id="flexSwitchCheckCheckedd5" checked>
+                      <label class="form-check-label" for="flexSwitchCheckCheckedd5">Empresa</label>
+                    </div>
+                    <div class="form-check-inline form-switch">
+                      <input class="form-check-input" name="provincia" type="checkbox" id="flexSwitchCheckCheckedd6" checked>
+                      <label class="form-check-label" for="flexSwitchCheckCheckedd6">Provincia</label>
+                    </div>
+                  </p>
                   <table class="table" id="vehiculos2">
                     <thead class="table-dark">
                       <tr>
-                        <th scope="col">Marca</th>
-                        <th scope="col">Dirección</th>
-                        <th scope="col">Ciudad</th>
-                        <th scope="col">País</th>
-                        <th scope="col">Nombre de la empresa</th>
-						            <th scope="col">Provincia</th>
+                        <th scope="col" class="marca">Marca</th>
+                        <th scope="col" class="direccion">Dirección</th>
+                        <th scope="col" class="ciudad">Ciudad</th>
+                        <th scope="col" class="pais">País</th>
+                        <th scope="col" class="empresa">Nombre de la empresa</th>
+						            <th scope="col" class="provincia">Provincia</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -262,11 +326,26 @@
                   <strong>Esto devuelve todos los tipos de vehículos de una marca.</strong> La clasificación de automóviles es un término general que se refiere a la manera de agrupar vehículos en categorías según sus características técnicas y comerciales.
                   <input type="text" min="1" max="898" class="form-control mb-2" id="marca3" placeholder="Ingresa la marca del vehículo">
                   <button type="button" class="btn btn-primary" id="enviar3">Buscar vehículos!</button>
+                  <p>
+                    <div class="form-check-inline form-switch">
+                      <input class="form-check-input" name="marca" type="checkbox" id="flexSwitchCheckCheckeddd" checked>
+                      <label class="form-check-label" for="flexSwitchCheckCheckeddd">Marca</label>
+                    </div>
+                    <div class="form-check-inline form-switch">
+                      <input class="form-check-input" name="tipo" type="checkbox" id="flexSwitchCheckCheckeddd2" checked>
+                      <label class="form-check-label" for="flexSwitchCheckCheckeddd2">Direccion</label>
+                    </div>
+                    <div class="form-check-inline form-switch">
+                      <input class="form-check-input" name="id2" type="checkbox" id="flexSwitchCheckCheckeddd3">
+                      <label class="form-check-label" for="flexSwitchCheckCheckeddd3">ID_Vehiculo</label>
+                    </div>
+                  </p>
                   <table class="table" id="vehiculos3">
                     <thead class="table-dark">
                       <tr>
-                        <th scope="col">Marca</th>
-                        <th scope="col">Tipo de vehiculo</th>
+                        <th scope="col" class="marca">Marca</th>
+                        <th scope="col" class="tipo">Tipo de vehiculo</th>
+                        <th scope="col" class="id2">ID del vehiculo</th>
                       </tr>
                     </thead>
                     <tbody>
