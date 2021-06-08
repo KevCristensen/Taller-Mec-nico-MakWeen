@@ -1,0 +1,3 @@
+Hola profe, le dejamos esta nota para avisarle que para
+la función del clima debe tener instalada la extensión de CORS
+que tenga un buen día, chau. 
