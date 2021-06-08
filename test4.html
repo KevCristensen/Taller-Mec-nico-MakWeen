@@ -32,16 +32,6 @@
 						$("#pokemons").append(`<tr id="filaPokemon"> <th scope="row"> ${item.Make_ID}</th> <td>${item.Make_Name}</td> <td>${item.Model_ID}</td> <td>${item.Model_Name}</td></tr>`)						
 					})
 				})
-                
-        $("input:checkbox:not(:checked)").each(function() {
-          $('td:nth-child(2)').hide();
-        });
-
-        $("input:checkbox").click(function(){
-            $('#pokemons td:nth-child(1)').toggle();
-        });        
-    
-
 			})
 
 			$("#enviar2").click(function(){
